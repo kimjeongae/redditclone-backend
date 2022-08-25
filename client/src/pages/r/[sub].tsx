@@ -5,26 +5,17 @@ import useSWR from 'swr';
 import cls from 'classnames'
 import Image from 'next/image'
 import { useAuthState } from '../../context/auth';
+import SideBar from '../../components/SideBar';
 
 const SubPage = () => {
 
     const [ownSub, setOwnSub] = useState(false);
     const {authenticated, user } = useAuthState();
 
-    const fetcher = async (url: string) => {
-    try
-        {
-            const res = await Axios.get(url);
-            return res.data;
-        } catch(error: any){
-            throw error.respose.data;
-        }
-    }
-
     const fileInputRef = useRef<HTMLInputElement>(null);
     const router = useRouter();
     const subName = router.query.sub;
-    const { data: sub, error } = useSWR(subName ? `/subs/${subName}` : null, fetcher );
+    const { data: sub, error } = useSWR(subName ? `/subs/${subName}` : null );
     console.log('sub', sub);
     useEffect(() => {
         if(!sub || !user) return;
@@ -118,7 +109,9 @@ const SubPage = () => {
                     </div>
                     {/* 포스트와 사이드바 */}
                     <div className='flex max-w-5xl px-4 pt-5 mx-auto'>
-
+                        <div className='w-full md:mr-3 md:w-8/12'>
+                        </div>                    
+                        <SideBar sub={sub}></SideBar>
                     </div>
                 </div>
             </Fragment>                

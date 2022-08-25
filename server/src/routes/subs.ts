@@ -53,7 +53,7 @@ const createSub = async(req: Request, res: Response, next) => {
 
 const topSubs = async (req: Request, res: Response) => {
     try{
-        const imageUrlExp = `COALESCE(s."imageUrn", 'http://www.gravatar.com/avatar?d=mp&f=y')`;
+        const imageUrlExp = `COALESCE('${process.env.APP_URL}/images/' || s."imageUrn", 'http://www.gravatar.com/avatar?d=mp&f=y')`;
         const subs = await AppDataSource
             .createQueryBuilder()
             .select(
@@ -78,6 +78,21 @@ const getSub = async (req: Request, res: Response) => {
 
     try{
         const sub = await Sub.findOneByOrFail({name});
+
+        // 포스트를 생성한 후에 해당 sub에 속하는 포스트 정보 넣어주기
+        const posts = await Post.find({
+            where:  { subName: sub.name },
+            order: {createdAt: "DESC"},
+            relations: ["comments", "votes"]
+        });
+
+        sub.posts = posts;
+
+        if(res.locals.user){
+            sub.posts.forEach((p) => p.setUserVote(res.locals.user));
+        }
+        console.log(sub);
+
         return res.json(sub);
     } catch(error) {
         return res.status(400).json({error: "서브를 찾을 수 없음" });

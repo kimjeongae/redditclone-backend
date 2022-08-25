@@ -15,7 +15,7 @@ const Home: NextPage = () => {
   }
   const address = "http://localhost:4000/api/subs/sub/topSubs";
   const {data: topSubs} = useSWR<Sub[]>(address, fetcher);
-  
+  console.log('topSubs', topSubs);
   const { authenticated } = useAuthState();
 
   return (
@@ -41,7 +41,7 @@ const Home: NextPage = () => {
                 <Link href={`/r/${sub.name}`}>
                   <a>
                     <Image 
-                      src="http://www.gravatar.com/avatar?d=mp&f=y"
+                      src={sub.imageUrl}
                       className="rounded-full cursor-pointer"
                       alt="sub"
                       width={24}

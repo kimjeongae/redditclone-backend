@@ -5,6 +5,8 @@ import { env } from 'process';
 import { AuthProvider } from '../context/auth';
 import { useRouter } from 'next/router';
 import NavBar from '../components/NavBar';
+import { SWRConfig } from 'swr';
+import Head from 'next/head';
 
 function MyApp({ Component, pageProps }: AppProps) {
 
@@ -15,15 +17,32 @@ function MyApp({ Component, pageProps }: AppProps) {
   const authRoutes = ["/register", "/login"];
   const authRoute = authRoutes.includes(pathname);
 
-  return (
-    <AuthProvider>
-      {!authRoute && <NavBar />}
-      <div className={authRoute ? "" : "pt-12"}>
-        <Component {...pageProps} />
-      </div>
-    </AuthProvider>
-    
-  )
+  const fetcher = async (url: string) => {
+      try
+      {
+          const res = await Axios.get(url);
+          return res.data;
+      } catch(error: any){
+          throw error.respose.data;
+      }
+  }
+  
+  return <>
+    <Head>
+      <script defer src="https://use.fontawesome.com/releases/v6.1.1/js/all.js" integrity="sha384-xBXmu0dk1bEoiwd71wOonQLyH+VpgR1XcDH3rtxrLww5ajNTuMvBdL5SOiFZnNdp" crossOrigin="anonymous"></script>
+    </Head>
+    <SWRConfig
+      value={{
+        fetcher
+      }}>
+      <AuthProvider>
+        {!authRoute && <NavBar />}
+        <div className={authRoute ? "" : "pt-12"}>
+          <Component {...pageProps} />
+        </div>
+      </AuthProvider>
+    </SWRConfig>
+  </>
 }
 
 export default MyApp
