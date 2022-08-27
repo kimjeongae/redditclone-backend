@@ -1,4 +1,3 @@
-import { defaultHead } from "next/head";
 import React from "react";
 import { Post } from '../types';
 import { FaArrowUp, FaArrowDown } from "react-icons/fa";
@@ -10,9 +9,10 @@ import { useAuthState } from "../context/auth";
 import Axios from "axios";
 
 interface PostCardProps {
-    post: Post,
-    subMutate: () => void
-};
+    post: Post
+    subMutate?: () => void
+    mutate?: () => void
+}
 
 const PostCard = ({
     post: {
@@ -29,7 +29,8 @@ const PostCard = ({
         username,
         sub,
     }, 
-    subMutate
+    mutate,
+    subMutate,    
  }: PostCardProps ) => {
     const router = useRouter()
     const isInSubPage = router.pathname === "/r/[sub]"
@@ -46,6 +47,7 @@ const PostCard = ({
                 slug,                
                 value,
             });
+            if (mutate) mutate();
             if(subMutate) { subMutate(); }
         } catch(error) {
             console.log(error);
