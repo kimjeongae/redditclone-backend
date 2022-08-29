@@ -11,11 +11,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@csstools/postcss-sass": "^5.0.1",
     "axios": "^0.27.2",
     "classnames": "^2.3.1",
     "dayjs": "^1.11.5",
     "env-cmd": "^10.1.0",
     "next": "12.2.5",
+    "postcss": "^8.4.16",
+    "postcss-simple-trig": "^0.2.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.4.0",
