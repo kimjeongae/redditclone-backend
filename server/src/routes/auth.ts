@@ -91,6 +91,7 @@ const login = async (req: Request, res: Response) => {
 };
 
 const me = async (_: Request, res: Response) => {
+    console.log("route me!!");
     return res.json(res.locals.user);
 };
 

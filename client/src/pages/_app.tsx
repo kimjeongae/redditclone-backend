@@ -11,6 +11,7 @@ import Head from 'next/head';
 function MyApp({ Component, pageProps }: AppProps) {
 
   Axios.defaults.baseURL = process.env.NEXT_PUBLIC_SERVER_BASE_URL + "/api";
+  console.log('process.env.NEXT_PUBLIC_SERVER_BASE_URL', process.env.NEXT_PUBLIC_SERVER_BASE_URL);
   Axios.defaults.withCredentials = true;
 
   const {pathname} = useRouter();
