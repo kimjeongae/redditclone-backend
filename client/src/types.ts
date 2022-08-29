@@ -18,12 +18,12 @@ export interface Sub {
     username: string;
     posts: Post[];
     postCount?: string;
-    
+  
     imageUrl: string;
     bannerUrl: string;
-}
+  }
 
-export interface Post {
+  export interface Post {
     identifier: string;
     title: string;
     slug: string;
@@ -32,13 +32,13 @@ export interface Post {
     username: string;
     createdAt: string;
     updatedAt: string;
-    sub?: Sub;
-
+    sub: Sub;
+  
     url: string;
     userVote?: number;
     voteScore?: number;
     commentCount?: number;
-}
+  }
 
 export interface Comment {
     identifier: string;
