@@ -1,4 +1,4 @@
-FROM node:16-alpine
+FROM node:alpine
 
 ENV PORT 3000
 
@@ -11,6 +11,6 @@ COPY ./ ./
 
 ENV NODE_ENV production
 
-RUN npm run build
+RUN npm run build:prod
 
 CMD ["npm", "run", "start"]

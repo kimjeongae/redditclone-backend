@@ -22,7 +22,7 @@ services:
         volumes:
             - /app/node_modules
             - ./server:/app
-        
+    
     client:
         build:
             context: ./client
