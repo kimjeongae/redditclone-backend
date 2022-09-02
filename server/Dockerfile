@@ -1,4 +1,4 @@
-FROM node:14.14.0-alpine
+FROM node:16.17.0
 
 WORKDIR /app
 
@@ -12,9 +12,17 @@ RUN npm install pm2 -g
 RUN npm install ts-node -g 
 RUN pm2 install typescript
 
+#############
+#dev
+#############
 # CMD ["npm", "run", "dev"]
-CMD ["pm2", "start", "src/server.ts", "--watch"]
 
-# CMD ["pm2", "start", "ecosystem.config.js", "--env", "production", "--watch"]
+
+#############
+#prod
+#############
+#CMD ["pm2", "start:prod", "src/server.ts", "--watch"]
+
+CMD ["pm2", "start", "ecosystem.config.js", "--env", "production", "--watch"]
 
 # CMD ["npm", "run", "dev"]
