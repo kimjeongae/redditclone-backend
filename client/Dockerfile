@@ -1,4 +1,4 @@
-FROM v12.22.9-alpine
+FROM node:16.17.0
 
 ENV PORT 3000
 
