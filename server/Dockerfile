@@ -1,4 +1,3 @@
-# FROM node:16.17.0
 FROM v12.22.9
 
 WORKDIR /app
