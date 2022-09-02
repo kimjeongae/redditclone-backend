@@ -1,4 +1,4 @@
-FROM v12.22.9
+FROM v12.22.9-alpine
 
 WORKDIR /app
 
