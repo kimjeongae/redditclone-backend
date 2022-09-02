@@ -1,4 +1,5 @@
-FROM node:16.17.0
+# FROM node:16.17.0
+FROM v12.22.9
 
 ENV PORT 3000
 
