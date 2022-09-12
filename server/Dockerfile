@@ -15,14 +15,14 @@ RUN pm2 install typescript
 #############
 #dev
 #############
-# CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "dev"]
 
 
 #############
 #prod
 #############
-# CMD ["pm2", "start:prod", "src/server.ts", "--watch"]
+## CMD ["pm2", "start:prod", "src/server.ts", "--watch"]
 
-# CMD ["pm2", "start", "ecosystem.config.js", "--env", "production", "--watch"]
+## CMD ["pm2", "start", "ecosystem.config.js", "--env", "production", "--watch"]
 
-CMD ["npm", "run", "start:prod"]
+# CMD ["npm", "run", "start:prod"]

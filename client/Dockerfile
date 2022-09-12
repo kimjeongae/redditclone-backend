@@ -13,19 +13,19 @@ COPY ./ ./
 #############
 #dev
 #############
-# ENV NODE_ENV development
+ENV NODE_ENV development
 
-# RUN npm run build:dev
+RUN npm run build:dev
 
-# CMD ["npm", "run", "start:dev"]
+CMD ["npm", "run", "start:dev"]
 
 
 #############
 #prod
 #############
 
-ENV NODE_ENV production
+# ENV NODE_ENV production
 
-RUN npm run build:prod
+# RUN npm run build:prod
 
-CMD ["npm", "run", "start:prod"]
+# CMD ["npm", "run", "start:prod"]
